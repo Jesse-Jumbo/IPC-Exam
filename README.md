@@ -122,22 +122,15 @@ $$
 
 *   系統參數設定
     
-    參數
-    
-    說明
-    
-    `socket_system_server`
-    
-    `Collector` 與 `System` 連接的 socket port
-    
-    `socket_consumer_collector`
-    
-    `Collector` 與 `Consumer` 連接的 socket port
+    | 參數 | 說明 |
+    | --- | --- |
+    | `socket_system_server` | `Collector` 與 `System` 連接的 socket port |
+    | `socket_consumer_collector` | `Collector` 與 `Consumer` 連接的 socket port |
     
 *   說明
     
     *   `Collector` 會與 `System` 和 `Consumer` 進行連線，並分別以 **Request/Reply** 和 **Pull/Push** 的模式溝通 (模式說明請參閱 **\[相關資料\]** 章節)。
-        
+
         `Collector` 與 `System`間以 **Request/Reply** 的模式連接，兩者綁定在系統參數 `socket_system_server` 所指定的 port。`Collector` 會從 `System` 得到該次任務處理完成的狀態。
         
         另一方面， `Collector` 與 `Consumer` 則是以 **Pull/Push** 的模式連接，兩者綁定在系統參數中 `socket_consumer_collector` 所指定的 port。系統運行中，`Collector` 會不斷地去接收 由`Consumer` 運算完成的子任務。
@@ -198,8 +191,7 @@ $$
 在 `src/` 底下執行
 
 1. 系統建置測試
-    *  在 Ubuntu 系統下，
-        * 確認系統正常運作，執行 `System/test`
+    *  在 Ubuntu 系統下，確認系統正常運作，執行 `System/test`
         ```    
         $ ./System/test
         ```
