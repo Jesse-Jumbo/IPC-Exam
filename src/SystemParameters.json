@@ -1,0 +1,14 @@
+{
+    "userID": "S522J0XX", 
+    "password": "A12345678",
+    "name": "王小明",
+
+    "image_path": "../img/3.jpeg",
+
+    "num_of_consumers": 1,
+    "num_to_split": 10,
+
+    "socket_producer_consumer": "tcp://127.0.0.1:8888",
+    "socket_consumer_collector": "tcp://127.0.0.1:8889",
+    "socket_system_server": "tcp://127.0.0.1:8887"
+}

@@ -1,0 +1,4 @@
+pyzmq == 22.3
+numpy == 1.20
+opencv-python == 4.5.4.58
+requests

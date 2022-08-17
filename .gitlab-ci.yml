@@ -1,0 +1,24 @@
+image: nckucsie/exam-docker:v5
+
+stages:
+    - build
+    - test
+    
+system-test:
+    stage: build
+    script:
+        - echo "Test for system establishing..."
+        - echo "Make sure system can boot successfully..."
+        - cp /home/Exam2021/test_data/test.jpeg ./img/test.jpeg
+        - cp /home/Exam2021/ans/test.jpeg ./results/ans/test.jpeg
+        - cp /home/Exam2021/System/* ./src/System
+        - chmod +x src/System/test
+        - cd src; ./System/test
+        
+exam:
+    stage: test
+    script:
+        - echo "Running test case..."
+        - cp /home/Exam2021/System/* ./src/System
+        - chmod +x  src/System/run
+        - cd src; ./System/run
