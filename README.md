@@ -1,6 +1,8 @@
 # IPC-Exam
 The offline version for entrance exam (2021)
 
+There are some mistakes including syntax errors, semantic errors, and system bugs and so on in the code. Please refer to the documents to eliminate these errors and to establish the system. After running the system successfully, please try to improve the system and speed up the 2D convolution task.
+
 [TOC]
 
 概述
