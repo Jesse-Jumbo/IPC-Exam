@@ -71,7 +71,7 @@ $$
 
 ### 程式內部流程
 
-在本次考試中，考生須要對系統中的三支程式進行改進與改正，包括 `Producer.py`、`Consumer.c` 以及 `ResultCollector.py`。三者分別對應到**圖 (一)**的 `Producer`,`Consumer` 和 `Result Collector`。本節將對這三支程式的細節與流程進行解說。
+在本次考試中，考生須要對系統中的三支程式進行改進與改正，包括 `Producer.py`、`Consumer.c` 以及 `ResultCollector.py`。三者分別對應到 **圖 (一)** 的 `Producer`,`Consumer` 和 `Result Collector`。本節將對這三支程式的細節與流程進行解說。
 
 #### Producer
 
