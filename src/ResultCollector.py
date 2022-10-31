@@ -1,3 +1,4 @@
+from socket import MSG_EOR
 import zmq
 import numpy as np
 import json
@@ -32,16 +33,16 @@ def reconstruct_image(bufs, num):
         # point: [x, y]
         point = buf["point"]
 
-        image[point[0]+10: point[0] + height - height_mask ] = buf["image"][10: -height_mask]
+        image[point[0]: point[0] + height - height_mask ] = buf["image"][0: -height_mask]
 
     return image
 
-def connect_to_consumer(context, env):
+def connect_to_consumer(context, env) -> zmq.Context:
     socket = context.socket(zmq.PULL)
     socket.bind(env["socket_consumer_collector"])
     return socket
 
-def connect_to_system(context, env):
+def connect_to_system(context, env) -> zmq.Context:
     socket = context.socket(zmq.REQ)
     socket.connect(env["socket_system_server"])
     return socket
@@ -49,7 +50,6 @@ def connect_to_system(context, env):
 def main(env):
 
     context = zmq.Context()
-
     socket_consumer = connect_to_consumer(context, env)
     socket_server = connect_to_system(context, env)
 
@@ -59,12 +59,12 @@ def main(env):
     while True:
         msg = socket_consumer.recv()
         jmsg = json.loads(msg)
+
         buffs.append(jmsg)
 
-        if len(buffs) == jmsg[total_buffers_num]:
+        if len(buffs) == jmsg["total_buffers_num"]:
             src_path = jmsg["src_path"]
             break
-
     ans = reconstruct_image(buffs, buffs[-1]["total_buffers_num"])
     
 

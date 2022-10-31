@@ -6,7 +6,7 @@ with open("./SystemParameters.json", "r") as f:
     env = json.load(f)
 
 """ compile consumer test """
-s = os.system("make")
+s = os.system("sudo make")
 assert s == 0
 
 """ system """

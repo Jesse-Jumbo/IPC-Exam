@@ -12,7 +12,7 @@ class MessageBuffer:
         self.mask = mask
         self.point = point
         self.total_num = total_num
-        self.src_path = "../results/.test.jpeg"
+        self.src_path = "../results/test.jpeg"
     
     def set_src_path(self, path):
         self.src_path = path
@@ -43,23 +43,23 @@ def split_matrix(img=[[]], mask=[[]], num=1):
 
     # an example of split matrix by height
     # you call split the matrix here into any sub-matrix as you want
-    start_row = 10.
+    start_row = 0
     for n in range(num):    
         # add more rows (larger than mask size) in order to handle the border.
-        buff_size = int(height_img / num)  + height_mask
+        buff_size = int(height_img / num) + height_mask
 
         # the upper left point
         point = [start_row, 0]
         
         if start_row + buff_size < height_img:
-            splitted_image = img[start_row :  start_row + buff_size]
+            splitted_image = img[start_row : start_row + buff_size]
         else:
             # padding  for the last buffer
             pad_height = buff_size - (height_img - start_row)
-            pad = [[0 for _ in range(width_img)]  for _ in range(pad_height)]
+            pad = [[0 for j in range(width_img)]  for i in range(pad_height)]
             splitted_image = img[start_row : ] + pad
        
-        msg = MessageBuffer(splitted_image, mask, point,  num)
+        msg = MessageBuffer(splitted_image, mask, point, num)
         buffs.append(msg)
 
         # move to next start ptr
@@ -87,7 +87,7 @@ def connect_to_server(context, env):
 def recv_image_path(socket):
     return socket.recv_string()
 
-def send_buffer(socket, buf)
+def send_buffer(socket, buf):
     msg = json.dumps(buf.to_dict())
     socket.send_string(msg)
 
@@ -104,7 +104,7 @@ def main(env):
    
     # load matrix
     # mask, image: 2d array
-    img = load_img("../img/1.jpeg")
+    img = load_img(env["image_path"])
     mask = load_mask()
 
     # recv start signal from result collector
@@ -114,6 +114,7 @@ def main(env):
 
     # send to consumers
     while len(msg_buffers) > 0:
+        print(len(msg_buffers))
         buf = msg_buffers.pop()
         send_buffer(socket_consumer, buf)
 

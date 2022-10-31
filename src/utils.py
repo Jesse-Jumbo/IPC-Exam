@@ -1,3 +1,4 @@
+import numpy as np
 def show_results(socket, path, env):
     socket.send_string(f"{env['userID']} e {path}")
     msg = socket.recv_string()
@@ -16,6 +17,7 @@ def save_image(img, path):
     cv2.imwrite(f"{path}", np.array(img))
 
 def load_mask():
+    import numpy as np
     mask = np.array([
                 [1, 4, 6, 4, 1],
                 [4, 16, 24, 16, 4],

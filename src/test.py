@@ -8,7 +8,7 @@ if os.path.isfile("../results/test.jpeg"):
     os.remove("../results/test.jpeg")
 
 """ compile consumer test  """
-s = os.system("make")
+s = os.system("sudo make")
 assert s == 0
 
 """ open judge  """

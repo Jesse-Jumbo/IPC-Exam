@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <string.h>
 #include <zmq.h>
-#include "json-c/json.h"
+#include <json-c/json.h>
 
 typedef struct MATRIX {
     double** mat;
@@ -30,8 +30,8 @@ int main() {
     // connection settings
     printf("[Consumer] Connecting to Server...\n");
     void* context = zmq_ctx_new();
-    void* socket_producer = zmq_socket(context, ZMQ_PUSH);
-    void* socket_collector = zmq_socket(context, ZMQ_PULL);
+    void* socket_producer = zmq_socket(context, ZMQ_PULL);
+    void* socket_collector = zmq_socket(context, ZMQ_PUSH);
     zmq_connect(socket_producer, json_object_get_string(socket_producer_consumer));
     zmq_connect(socket_collector, json_object_get_string(socket_consumer_collector));
     
@@ -48,7 +48,7 @@ int main() {
         work = Worker((char*) buffer);
         // send message to result collector
         const char* msg = json_object_to_json_string(work);
-        zmq_send(socket_collector, msg, (int) strlen(msg)/2 , 0);
+        zmq_send(socket_collector, msg, (int) strlen(msg), 0);
         
         free(buffer);
     }
@@ -56,6 +56,7 @@ int main() {
     zmq_close(socket_producer);
     zmq_close(socket_collector);
     zmq_ctx_destroy(context);
+    return 0;
 }
 
 struct json_object* Worker(char* buf) {
@@ -125,7 +126,7 @@ t_matrix* conv2d (t_matrix* Q, t_matrix* M) {
             // Mask [k][l]
             // Q [i+k][j+l]
             if ((i+k < Q->col) && (j+l < Q->row))
-                A->mat[i][j] += (M->mat[k][l] * Q->mat[i+k][j+l])
+                A->mat[i][j] += (M->mat[k][l] * Q->mat[i+k][j+l]);
             else // border
                 A->mat[i][j] += 0.;
         }
