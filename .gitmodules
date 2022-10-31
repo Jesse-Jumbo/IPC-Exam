@@ -1,3 +1,6 @@
 [submodule "src/json-c"]
 	path = src/json-c
 	url = https://github.com/json-c/json-c.git
+[submodule "src/zguide"]
+	path = src/zguide
+	url = https://github.com/imatix/zguide.git
